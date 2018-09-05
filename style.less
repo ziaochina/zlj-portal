@@ -1,0 +1,244 @@
+.zlj-portal {
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    background-color: #ececec;
+    &-header {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        flex: 0 0 48px;
+        height: 48px;
+        background-color: #000c17;
+        color: #fff; //overflow: visible;
+        z-index: 2;
+        &-left {
+            height: 100%;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            background: #69c6f5;
+            border-bottom: 1px solid rgb(55, 79, 98);
+            &-logo {
+                width: 48px;
+                height: 48px;
+            }
+            h1,
+            h2,
+            h3 {
+                color: #fff;
+                font-weight: bold;
+                margin-left: 10px;
+            }
+            &-fold {
+                width: 80px;
+                flex: 0 0 80px;
+            }
+            &-unfold {
+                width: 200px;
+                flex: 0 0 200px;
+            }
+        }
+        &-center {
+            height: 100%;
+            display: flex;
+            flex-direction: row;
+            background: #fff;
+            overflow: hidden;
+            flex: 0 0 800px;
+            &-foldMenu {
+                flex: 0 0 60px;
+                align-items: flex-start;
+                justify-content: center;
+                padding-left: 10px;
+                border-bottom: 1px solid #e7e6e6;
+            }
+            &-tabs {
+                flex: 0 0 800px;
+                height: 100%;
+                justify-content: flex-end;
+                .ant-tabs-bar {
+                    background: #fff;
+                    flex: 0 0 37px;
+                    margin-bottom: 0px;
+                }
+                .ant-tabs-bar {
+                    border-bottom: 1px solid #e7e6e6;
+                }
+                .ant-tabs.ant-tabs-card>.ant-tabs-bar .ant-tabs-tab {
+                    background: #fff;
+                }
+                .ant-tabs.ant-tabs-card>.ant-tabs-bar .ant-tabs-tab-active {
+                    background: #f6f6f6;
+                }
+                .ant-tabs-nav-wrap {
+                    margin-left: 10px;
+                    height: 32px;
+                }
+            }
+        }
+        &-right {
+            height: 100%; //padding: 0px 24px 0px 10px;
+            display: flex;
+            flex-direction: row; //align-items: center;
+            justify-content: flex-end; //overflow: visible;
+            background: #fff;
+            overflow: hidden; //justify-content: space-between;
+            flex: 1;
+            border-bottom: 1px solid #e7e6e6; 
+            &-search{
+                font-size: 20px;
+                flex:  0 0 50px;
+                justify-content: center;
+                align-items: center;
+                color: rgba(0,0,0,.65);
+                &:hover{
+                    color:#1890ff;
+                }
+                cursor: pointer;
+                .fa {
+                    font-size: 20px;
+                    &:hover{
+                        color:#1890ff;
+                    }
+                }
+            }
+            &-my-title {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                height: 46px;
+            }
+            .mk-menu {
+                border-bottom: 0px !important;
+            }
+            .mk-menu>li {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                .mk-icon {
+                    font-size: 18px;
+                    margin-right: 8px;
+                }
+            }
+            &-photo {
+                width: 30px;
+                height: 30px;
+                border-radius: 30px;
+                margin-right: 10px;
+            }
+            &-topMenu {
+                //flex: 1;
+                height: 100%;
+                align-items: flex-end;
+                overflow: hidden;
+                flex: 0 0 auto;
+            }
+        }
+    }
+    &-content-tabs {
+        flex: 0 0 37px;
+        .ant-tabs-bar {
+            margin-bottom: 0px;
+            padding: 5px 0px 0px 5px;
+            background: #e5e6e6;
+        }
+    }
+    &-content {
+        height: 100%;
+        display: flex;
+        flex-direction: row;
+        flex: 1 1 auto;
+        &-left {
+            overflow: visible;
+            background: rgb(55, 79, 98);
+            &-menu {
+                flex: 1;
+                background: rgb(55, 79, 98)
+            }
+            &-foldMenu {
+                flex: 0 0 40px;
+            }
+            &-fold {
+                width: 80px;
+                flex: 0 0 80px;
+            }
+            &-unfold {
+                width: 200px;
+                flex: 0 0 200px;
+            }
+            .ant-menu>li:first-child {
+                margin-top: 0px;
+            }
+            .ant-menu .anticon:before {
+                font-family: inherit !important;
+            }
+            .ant-menu-submenu-popup.ant-menu-dark .ant-menu-item-selected,
+            .ant-menu.ant-menu-dark .ant-menu-item-selected {
+                background: rgb(55, 79, 98);
+            } 
+
+            .ant-menu-submenu-popup > .ant-menu-sub{
+                background: rgb(55, 79, 98);
+                padding: 10 0 10 0;
+            }
+
+            
+            .ant-menu-item-group {
+                padding: 0 0 4 0;
+                background: rgb(55, 79, 98);
+            }
+            .ant-menu-item-group-list {
+                display: flex;
+                width: 620px;
+                flex-wrap: wrap;
+                
+            }
+            .ant-menu-item-group-title {
+                padding-left: 14px;
+                color: lightskyblue;
+                padding: 4px 16px 0px;
+            }
+            .ant-menu-sub .ant-menu-item {
+                width: 150px;
+                margin: 0 0 0 0;
+                height: 28px;
+                line-height: 28px;
+                padding: 0 0px 0 36px;
+            }
+        }
+        &-main {
+            flex: 1 1 auto;
+            background-color: #f6f6f6;
+            padding: 10px;
+            overflow: auto; //background: #fff;
+            box-shadow: 0 1px 1px rgba(0, 0, 0, 0.15);
+            &>div {
+                background-color: #fff;
+                border-style: solid;
+                border-width: 1 1 1 1;
+                border-color: #e7e6e6;
+                border-top-left-radius: 4px;
+                border-top-right-radius: 4px;
+            }
+        }
+    }
+    .mk-movable {
+        overflow: hidden;
+        opacity: 0.6;
+        z-index: 99;
+        .mk-btn {
+            z-index: 99;
+            width: 100%;
+            height: 100%;
+            padding: 0;
+        }
+    }
+    .ant-tabs.ant-tabs-card>.ant-tabs-bar .ant-tabs-tab {
+        line-height: 30px;
+        height: auto;
+    }
+}
