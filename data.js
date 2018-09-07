@@ -34,7 +34,7 @@ export function getMeta() {
 					children: [{
 						name: 'foldMenu',
 						component: 'Icon',
-						type: `{{data.isFoldMenu ? 'menu-unfold' :'menu-fold'}}`,
+						type: `{{data.isFoldMenu ? 'double-right' :'double-left'}}`,
 						title: '收起菜单',
 						showStyle: 'showy',
 						style: { fontSize: 19 },
@@ -78,8 +78,6 @@ export function getMeta() {
 						children: {
 							name: 'icon',
 							component: 'Icon',
-							fontFamily: 'awesome',
-							showStyle: 'blueSky',
 							type: 'search'
 						},
 					},
@@ -105,9 +103,8 @@ export function getMeta() {
 							children: {
 								name: 'icon',
 								component: 'Icon',
-								fontFamily: 'awesome',
-								showStyle: 'blueSky',
-								type: 'bullhorn'
+								size: 'large',
+								type: 'bell'
 							}
 						},
 					},
@@ -138,27 +135,6 @@ export function getMeta() {
 								type: 'appstore-o'
 							},
 								"{{data.isTabsStyle ? '正常风格' : '多页签显示风格'}}"]
-						}, {
-							name: 'gitter',
-							component: 'Menu.Item',
-							key: 'gitter',
-							_visible: false,
-							children: [{
-								name: 'icon',
-								component: 'Icon',
-								fontFamily: 'awesome',
-								type: 'wechat'
-							}, '聊天']
-						}, {
-							name: 'github',
-							component: 'Menu.Item',
-							key: 'github',
-							_visible: false,
-							children: [{
-								name: 'icon',
-								component: 'Icon',
-								type: 'github'
-							}, '源代码']
 						}, {
 							name: 'my',
 							component: 'Menu.SubMenu',
@@ -204,9 +180,6 @@ export function getMeta() {
 					mode: 'vertical',
 					theme: 'dark',
 					className: 'zlj-portal-content-left-menu',
-					//forceSubMenuRender:true,
-					//subMenuCloseDelay: 0.06,
-					//subMenuOpenDelay: 0.3,
 					inlineCollapsed: '{{data.isFoldMenu}}',
 					selectedKeys: "{{$getMenuSelectKeys()}}",
 					defaultOpenKeys: "{{data.menuDefaultOpenKeys}}",
@@ -220,7 +193,7 @@ export function getMeta() {
 					children: [{
 						name: 'foldMenu',
 						component: 'Icon',
-						type: `{{data.isFoldMenu ? 'menu-unfold' :'menu-fold'}}`,
+						type: `{{data.isFoldMenu ? 'double-right' :'double-left'}}`,
 						title: `{{data.isFoldMenu ? '展开菜单' :'收起菜单'}}`,
 						showStyle: 'showy',
 						style: { fontSize: 19 },
@@ -273,23 +246,6 @@ export function getMeta() {
 
 				}]
 			}]
-		}, {
-			name: 'issue',
-			component: 'Movable',
-			_visible: false,
-			onClick: '{{$issueClick}}',
-			style: {
-				bottom: 30,
-				left: 8,
-				width: 50,
-				height: 50,
-			},
-			children: {
-				name: 'btn',
-				component: 'Button',
-				type: 'showy',
-				children: '填问题'
-			}
 		}]
 	}
 }
