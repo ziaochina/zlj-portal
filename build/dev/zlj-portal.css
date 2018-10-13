@@ -5,6 +5,15 @@
   display: flex;
   flex-direction: column;
   background-color: #ececec;
+  /*
+    &-content-tabs {
+        flex: 0 0 37px;
+        .ant-tabs-bar {
+            margin-bottom: 0px;
+            padding: 5px 0px 0px 5px;
+            background: #e5e6e6;
+        }
+    }*/
 }
 .zlj-portal-header {
   display: flex;
@@ -17,6 +26,7 @@
   z-index: 2;
 }
 .zlj-portal-header-left {
+  display: flex;
   height: 100%;
   flex-direction: row;
   align-items: center;
@@ -29,10 +39,7 @@
   width: 48px;
   height: 48px;
 }
-.zlj-portal-header-left h1,
-.zlj-portal-header-left h2,
-.zlj-portal-header-left h3 {
-  color: #fff;
+.zlj-portal-header-left-caption {
   font-weight: bold;
   margin-left: 10px;
 }
@@ -48,49 +55,21 @@
   height: 100%;
   display: flex;
   flex-direction: row;
-  background: #fff;
   overflow: hidden;
-  flex: 0 0 800px;
-}
-.zlj-portal-header-center-foldMenu {
-  flex: 0 0 60px;
-  align-items: flex-start;
-  justify-content: center;
-  padding-left: 10px;
-  border-bottom: 1px solid #e7e6e6;
-}
-.zlj-portal-header-center-tabs {
-  flex: 0 0 800px;
-  height: 100%;
-  justify-content: flex-end;
-}
-.zlj-portal-header-center-tabs .ant-tabs-bar {
-  background: #fff;
-  flex: 0 0 37px;
-  margin-bottom: 0px;
-}
-.zlj-portal-header-center-tabs .ant-tabs-bar {
-  border-bottom: 1px solid #e7e6e6;
-}
-.zlj-portal-header-center-tabs .ant-tabs.ant-tabs-card > .ant-tabs-bar .ant-tabs-tab {
-  background: #fff;
-}
-.zlj-portal-header-center-tabs .ant-tabs.ant-tabs-card > .ant-tabs-bar .ant-tabs-tab-active {
-  background: #f6f6f6;
-}
-.zlj-portal-header-center-tabs .ant-tabs-nav-wrap {
-  margin-left: 10px;
-  height: 32px;
 }
 .zlj-portal-header-right {
   height: 100%;
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
+  align-items: center;
   background: #fff;
   overflow: hidden;
   flex: 1;
   border-bottom: 1px solid #e7e6e6;
+}
+.zlj-portal-header-right svg {
+  font-size: 19px;
 }
 .zlj-portal-header-right-search {
   font-size: 20px;
@@ -115,18 +94,6 @@
   align-items: center;
   height: 46px;
 }
-.zlj-portal-header-right .mk-menu {
-  border-bottom: 0px !important;
-}
-.zlj-portal-header-right .mk-menu > li {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-}
-.zlj-portal-header-right .mk-menu > li .mk-icon {
-  font-size: 18px;
-  margin-right: 8px;
-}
 .zlj-portal-header-right-photo {
   width: 30px;
   height: 30px;
@@ -134,18 +101,13 @@
   margin-right: 10px;
 }
 .zlj-portal-header-right-topMenu {
-  height: 100%;
+  height: 48px;
   align-items: flex-end;
   overflow: hidden;
   flex: 0 0 auto;
 }
-.zlj-portal-content-tabs {
-  flex: 0 0 37px;
-}
-.zlj-portal-content-tabs .ant-tabs-bar {
-  margin-bottom: 0px;
-  padding: 5px 0px 0px 5px;
-  background: #e5e6e6;
+.zlj-portal-header-right .ant-menu-overflowed-submenu {
+  display: none;
 }
 .zlj-portal-content {
   height: 100%;
@@ -154,6 +116,8 @@
   flex: 1 1 auto;
 }
 .zlj-portal-content-left {
+  display: flex;
+  flex-direction: column;
   overflow: visible;
   background: #374f62;
 }
@@ -162,7 +126,15 @@
   background: #374f62;
 }
 .zlj-portal-content-left-foldMenu {
+  display: flex;
   flex: 0 0 40px;
+  align-items: center;
+  justify-content: center;
+  color: whitesmoke;
+}
+.zlj-portal-content-left-foldMenu i:hover {
+  cursor: pointer;
+  color: #ccc;
 }
 .zlj-portal-content-left-fold {
   width: 80px;
@@ -208,19 +180,35 @@
   padding: 0 0px 0 36px;
 }
 .zlj-portal-content-main {
+  display: flex;
   flex: 1 1 auto;
+  flex-direction: column;
   background-color: #f6f6f6;
-  padding: 10px;
   overflow: auto;
-  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.15);
 }
-.zlj-portal-content-main > div {
-  background-color: #fff;
-  border-style: solid;
-  border-width: 1 1 1 1;
-  border-color: #e7e6e6;
-  border-top-left-radius: 4px;
-  border-top-right-radius: 4px;
+.zlj-portal-content-main-tabs {
+  flex: 0 0 36px;
+}
+.zlj-portal-content-main-tabs .ant-tabs {
+  height: 36px;
+}
+.zlj-portal-content-main-tabs .ant-tabs-bar {
+  margin: 0;
+}
+.zlj-portal-content-main-tabs .ant-tabs.ant-tabs-card > .ant-tabs-bar .ant-tabs-nav-container {
+  height: 36px;
+}
+.zlj-portal-content-main-tabs .ant-tabs.ant-tabs-card > .ant-tabs-bar .ant-tabs-tab {
+  line-height: 28px;
+  height: auto;
+}
+.zlj-portal-content-main-tabs .ant-tabs-nav {
+  padding: 6 0 0 10;
+}
+.zlj-portal-content-main-app {
+  flex: 1;
+  padding: 10px;
+  background: #fff;
 }
 .zlj-portal .mk-movable {
   overflow: hidden;
@@ -233,10 +221,4 @@
   height: 100%;
   padding: 0;
 }
-.zlj-portal .ant-tabs.ant-tabs-card > .ant-tabs-bar .ant-tabs-tab {
-  line-height: 30px;
-  height: auto;
-}
 
-
-/*# sourceMappingURL=zlj-portal.css.map*/

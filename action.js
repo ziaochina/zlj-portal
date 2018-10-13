@@ -1,150 +1,95 @@
-import React from 'react'
-import { Menu } from 'mk-component'
-import { action as MetaAction, AppLoader } from 'mk-meta-engine'
-import { fromJS } from 'immutable'
-import { history, fetch } from 'mk-utils'
-import config from './config'
 
-class action {
+import { actionMixin, fetch, navigate } from 'maka'
+
+@actionMixin('base')
+export default class action {
     constructor(option) {
-        this.metaAction = option.metaAction
-        this.config = config.current
-        this.webapi = this.config.webapi
+        Object.assign(this, option.mixins)
     }
 
-    onInit = ({ component, injections }) => {
-        this.component = component
-        this.injections = injections
-
-        injections.reduce('init')
-
+    onInit = () => {
         this.load()
-
-        //history增加
-        history.listen('zlj-portal', this.listen)
+        navigate.listen(this.listen)
+        navigate.redirect(navigate.getLocation().pathname + navigate.getLocation().search)
     }
-
-    //history增加
-    listen = (childApp, location, action) => {
-        const currentAppName = this.metaAction.gf('data.content.appName')
-        const targetAppName = childApp
-        if (!targetAppName) {
-            this.injections.reduce('closeAll')
-            return
-        }
-
-        if (targetAppName == currentAppName) {
-            return
-        }
-
-        this.setContent('', targetAppName)
-    }
-
-
-    componentWillUnmount = () => {
-        history.unlisten('zlj-portal', this.listen)
-    }
-
 
     load = async () => {
-        const response = await this.webapi.portal.init()
+        const response = await fetch.post('/v1/portal/init', {})
         if (response.user) {
-            this.metaAction.context.set('currentUser', response.user)
+            this.base.context.set('currentUser', response.user)
             this.metaAction.sf('data.other.currentUser', fromJS(response.user))
         }
         else {
-            this.metaAction.context.set('currentUser', undefined)
+            this.base.context.set('currentUser', undefined)
+            /*
             if (this.component.props.onRedirect && this.config.goAfterSignOut) {
                 this.component.props.onRedirect(this.config.goAfterSignOut)
-            }
+            }*/
         }
-
-        if (response.menu) {
-            this.injections.reduce('load', { menu: response.menu })
-        }
-        /*
-        如果菜单从ajax获取，那么使用下面的方式
-        if (this.webapi.getMenu) {
-            const menu = await this.webapi.getMenu()
-            this.injections.reduce('load', {menu})
-        }*/
     }
 
-    getLogo = () => this.config.logo
-
-    getConfig = () => this.config
-
-    getPhoto = () => require('./img/photo.png')
-
-    getCurrentUser = () => this.metaAction.context.get('currentUser') || {}
+    getCurrentUser = () => this.base.context.get('currentUser') || {}
 
     getMenuChildren = () => {
-        const menu = this.metaAction.gf('data.menu').toJS()
+        const menu = this.base.gs('data.menu')
 
         const loop = (children, level) => {
             const ret = []
             children.forEach(child => {
-
                 let ele = {
-                    name: child.key,
-                    key: child.key
+                    name: child.appName,
+                    key: child.appName
                 }
 
                 //是group
                 if (child.isGroup) {
-                    ele.component = 'Menu.ItemGroup'
-                    ele.title = child.name
-                    if(child.children){
+                    ele.component = 'antd.Menu.ItemGroup'
+                    ele.title = child.title
+                    if (child.children) {
                         ele.children = loop(child.children, level + 1)
                     }
                 }
                 else {
                     //没有下级
                     if (!child.children) {
-                        ele.component = 'Menu.Item'
+                        ele.component = 'antd.Menu.Item'
 
                         if (child.icon || level == 1) {
                             ele.children = [{
-                                name: 'icon',
-                                component: 'Icon',
+                                component: 'antd.Icon',
                                 type: child.icon || 'desktop',
-                                className: 'anticon',
-                                fontFamily: child.fontFamily
+                                className: 'anticon'
                             }, {
                                 name: 'name',
-                                component: '::span',
-                                children: child.name
+                                component: 'span',
+                                children: child.title
                             }]
                         }
                         else {
-                            ele.children = child.name
+                            ele.children = child.title
                         }
                     }
                     else {
-                        ele.component = 'Menu.SubMenu'
+                        ele.component = 'antd.Menu.SubMenu'
                         ele.children = loop(child.children, level + 1)
 
                         if (child.icon || level == 1) {
                             ele.title = [{
-                                name: 'icon',
-                                component: 'Icon',
+                                component: 'antd.Icon',
                                 className: 'anticon',
-                                type: child.icon || 'desktop',
-                                fontFamily: child.fontFamily
+                                type: child.icon || 'desktop'
                             }, {
-                                name: 'name',
-                                component: '::span',
-                                children: child.name
+                                component: 'span',
+                                children: child.title
                             }]
                         }
                         else {
-                            ele.title = child.name
+                            ele.title = child.title
                         }
                     }
                 }
 
-
-                if(!(child.isVisible === false))
+                if (!(child.isVisible === false))
                     ret.push(ele)
             })
             return ret
@@ -159,92 +104,151 @@ class action {
     topMenuClick = async (e) => {
         switch (e.key) {
             case 'logout':
-                if (this.component.props.onRedirect && this.config.goAfterSignOut) {
-                    this.metaAction.context.set('currentUser', undefined)
-                    fetch.clearAccessToken()
-                    this.component.props.onRedirect(this.config.goAfterSignOut)
-                }
-                break;
-            case 'github':
-                window.open('https://www.github.com/ziaochina/mk-demo')
-                break;
-            case 'gitter':
-                window.open('https://gitter.im/mk-js/mk-js?utm_source=share-link&utm_medium=link&utm_campaign=share-link')
+                this.base.context.set('currentUser', undefined)
+                fetch.clearAccessToken()
+                navigate.redirect('/zlj-sign-in')
                 break;
             case 'mySetting':
-                if (!this.config.apps['mk-app-my-setting'])
-                    throw '不存在mk-app-my-setting应用，该功能不能使用'
-
-                this.setContent('个人设置', 'mk-app-my-setting')
+                this.setContent('个人设置', 'zlj-my')
                 break;
             case 'toggleTabs':
-                this.metaAction.sf('data.isTabsStyle', !this.metaAction.gf('data.isTabsStyle'))
+                this.base.ss({ 'data.isTabsStyle': !this.base.gs('data.isTabsStyle') })
         }
     }
 
 
     menuClick = (e) => {
-        const menu = this.metaAction.gf('data.menu').toJS()
-        const find = (children) => {
-            for (let child of children) {
-                if (child.key == e.key) {
-                    return child
-                }
-                if (child.children) {
-                    let o = find(child.children)
-                    if (o) return o
-                }
-            }
-        }
-
-        const hit = find(menu)
+        const hit = this.findMenu(this.base.gs('data.menu'), e.key)
         if (hit) {
-            this.setContent(hit.name, hit.appName, hit.appParams)
+            this.setContent(hit.name, hit.appName, hit.appProps)
         }
-    }
-
-    issueClick = () => {
-        window.open('https://github.com/ziaochina/mk-demo/issues/new')
     }
 
     getMenuSelectKeys = () => {
-        const content = this.metaAction.gf('data.content')
+        const content = this.base.gs('data.content')
         if (!content) return
-        const menuKeyNameMap = this.metaAction.gf('data.menuKeyNameMap')
-        return [menuKeyNameMap.get(content.get('name'))]
+        var menu = this.findMenu(this.base.gs('data.menu'), content.appName)
+        return menu ? [menu.appName] : []
     }
+
     tabChange = (key) => {
-        const openTabs = this.metaAction.gf('data.openTabs')
-        const curr = openTabs.find(o => o.get('name') == key)
-        this.setContent(curr.get('name'), curr.get('appName'), curr.get('appProps'))
+        const openTabs = this.base.gs('data.openTabs')
+        const curr = openTabs.find(o => o.appName == key)
+        this.setContent(curr.title, curr.appName, curr.appProps)
     }
 
     tabEdit = (key, action) => {
         if (action == 'remove') {
-            this.injections.reduce('closeContent', key)
+            var openTabs = this.base.gs('data.openTabs') || []
+            var hitIndex = openTabs.findIndex(o => o.appName == key)
+            openTabs.splice(hitIndex, 1)
+            var json = {
+                'data.openTabs': openTabs,
+                'data.content': openTabs.length > 0 ? openTabs[openTabs.length - 1] : {}
+            }
+            this.base.setState(json)
         }
     }
 
-    setContent = (name, appName, appProps) => {
-        this.injections.reduce('setContent', name, appName, appProps)
+    findMenu(menu, appName) {
+        const loop = (children) => {
+            var ret
+            for (var child of children) {
+                if (child.appName == appName) {
+                    ret = child
+                    break
+                }
+
+                if (child.children) {
+                    ret = loop(child.children)
+                    if (ret)
+                        break
+                }
+            }
+            return ret
+        }
+        return loop(menu)
     }
 
     foldMenu = () => {
-        this.metaAction.sf('data.isFoldMenu', !this.metaAction.gf('data.isFoldMenu'))
-        setTimeout(function () {
-            var event = document.createEvent('HTMLEvents')
-            event.initEvent("resize", true, true)
-            window.dispatchEvent(event)
+        this.base.ss({ 'data.isFoldMenu': !this.base.gs('data.isFoldMenu') })
+    }
+
+    setContent = (title, appName, appProps) => {
+        if(!appName)
+            return 
+
+        //判断当前显示页签appName和要新打开的是否一致
+        var data = this.base.getState('data'),
+            menu = data.menu,
+            openTabs = data.openTabs || [],
+            isTabsStyle = data.isTabsStyle,
+            oriMenuItem = this.findMenu(menu, appName),
+            json = {}
+
+        const currContent = data.content
+        if (currContent && appName == currContent.appName)
+            return
+
+        title = title || (oriMenuItem && oriMenuItem.title)
+        appProps = appProps || (oriMenuItem && oriMenuItem.appProps) || {}
+
+        var content = { title, appName, appProps }
+        json['data.content'] = content
+
+        var hitIndex = openTabs.findIndex(o => o.title == title || o.appName == appName)
+        var hit = hitIndex != -1
+
+        if (!hit) {
+            if (!isTabsStyle)
+                openTabs = []
+            openTabs.push(content)
+
+            json['data.openTabs'] = openTabs
+        }
+        else {
+            if (isTabsStyle) {
+                json['data.openTabs' + hitIndex] = content
+            }
+            else {
+                openTabs = []
+                openTabs.push(content)
+                json['data.openTabs'] = openTabs
+            }
+        }
+
+        this.base.setState(json)
+
+        setTimeout(() => {
+            let location = navigate.getLocation()
+            let full = `${location.pathname}${location.search}`
+            let segs = full.split('/')
+            segs = segs.slice(0, segs.indexOf('zlj-portal') + 1)
+            segs.push(content.appName)
+            navigate.redirect(segs.join('/'))
         }, 0)
     }
-}
 
-export default function creator(option) {
-    const metaAction = new MetaAction(option),
-        o = new action({ ...option, metaAction }),
-        ret = { ...metaAction, ...o }
+    listen = (location, action) => {
+        let full = `${location.pathname}${location.search}`
+        if(!full || full.indexOf('zlj-portal') == -1) 
+            return 
 
-    metaAction.config({ metaHandlers: ret })
+        let segs = full.split('/'),
+            targetApp = segs[segs.length-1]
+        
+        if(targetApp == 'zlj-portal' || !targetApp){
+            this.base.ss({
+                'data.openTabs': [],
+                'data.content': {}
+            })
+        }
+        else{
+            this.setContent('', targetApp)
+        }
+    }
 
-    return ret
+    componentWillUnmount = () => {
+        navigate.unlisten(this.listen)
+    }
 }

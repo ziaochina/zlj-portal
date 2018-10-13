@@ -1,13 +1,13 @@
 (function webpackUniversalModuleDefinition(root, factory) {
 	if(typeof exports === 'object' && typeof module === 'object')
-		module.exports = factory(require("MK.utils"), require("MK.metaEngine"), require("immutable"), require("react"), require("MK.component"));
+		module.exports = factory(require("maka"));
 	else if(typeof define === 'function' && define.amd)
-		define(["MK.utils", "MK.metaEngine", "immutable", "react", "MK.component"], factory);
+		define(["maka"], factory);
 	else if(typeof exports === 'object')
-		exports["MKApp_zlj_portal"] = factory(require("MK.utils"), require("MK")["metaEngine"], require("immutable"), require("react"), require("MK.component"));
+		exports["MakaApp-zlj-portal"] = factory(require("maka"));
 	else
-		root["MKApp_zlj_portal"] = factory(root["MK"]["utils"], root["MK.metaEngine"], root["Immutable"], root["React"], root["MK"]["component"]);
-})(window, function(__WEBPACK_EXTERNAL_MODULE__1__, __WEBPACK_EXTERNAL_MODULE__2__, __WEBPACK_EXTERNAL_MODULE__5__, __WEBPACK_EXTERNAL_MODULE__18__, __WEBPACK_EXTERNAL_MODULE__19__) {
+		root["MakaApp-zlj-portal"] = factory(root["maka"]);
+})(window, function(__WEBPACK_EXTERNAL_MODULE__0__) {
 return /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
 /******/ 	var installedModules = {};
@@ -91,129 +91,150 @@ return /******/ (function(modules) { // webpackBootstrap
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 6);
+/******/ 	return __webpack_require__(__webpack_require__.s = 8);
 /******/ })
 /************************************************************************/
 /******/ ([
 /* 0 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, exports) {
 
-"use strict";
-Object.defineProperty(exports,"__esModule",{value:true});var _webapi=__webpack_require__(9);var _webapi2=_interopRequireDefault(_webapi);function _interopRequireDefault(obj){return obj&&obj.__esModule?obj:{default:obj};}var _options={webapi:_webapi2.default,webapiMap:{'portal.init':'/v1/portal/init','user.logout':'/v1/user/logout'},websiteName:'某某系统',logo:'logo.png',goAfterSignOut:{appName:'zlj-sign-in',appParams:{}},menu:[{key:'1',name:'首页',appName:'zlj-home',icon:'home',fontFamily:'awesome',isDefault:true}]};function config(options){if(options){Object.assign(_options,options);}}config.current=_options;exports.default=config;module.exports=exports['default'];
+module.exports = __WEBPACK_EXTERNAL_MODULE__0__;
 
 /***/ }),
 /* 1 */
 /***/ (function(module, exports) {
 
-module.exports = __WEBPACK_EXTERNAL_MODULE__1__;
+function _defineProperty(obj, key, value) {
+  if (key in obj) {
+    Object.defineProperty(obj, key, {
+      value: value,
+      enumerable: true,
+      configurable: true,
+      writable: true
+    });
+  } else {
+    obj[key] = value;
+  }
+
+  return obj;
+}
+
+module.exports = _defineProperty;
 
 /***/ }),
 /* 2 */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __WEBPACK_EXTERNAL_MODULE__2__;
+module.exports = __webpack_require__(9);
+
 
 /***/ }),
 /* 3 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, exports) {
 
-"use strict";
-Object.defineProperty(exports,"__esModule",{value:true});exports.getMeta=getMeta;exports.getInitState=getInitState;function _defineProperty(obj,key,value){if(key in obj){Object.defineProperty(obj,key,{value:value,enumerable:true,configurable:true,writable:true});}else{obj[key]=value;}return obj;}function getMeta(){var _children,_ref;return{name:'root',component:'Layout',className:'zlj-portal',children:[{name:'header',component:'Layout',className:'zlj-portal-header',children:[{name:'left',component:'Layout',className:"{{'zlj-portal-header-left zlj-portal-header-left-' + (data.isFoldMenu?'fold':'unfold') }}",children:[{name:'logo',component:'::img',className:'zlj-portal-header-left-logo',src:'{{$getConfig().logo}}'},{name:'siteName',component:'::h3',children:'{{$getConfig().websiteName}}',_visible:'{{!data.isFoldMenu}}'}]},{name:'center',component:'Layout',className:"zlj-portal-header-center",children:[{name:'foldMenu',component:'Layout',className:"zlj-portal-header-center-foldMenu",_visible:false,children:[{name:'foldMenu',component:'Icon',type:'{{data.isFoldMenu ? \'menu-unfold\' :\'menu-fold\'}}',title:'收起菜单',showStyle:'showy',style:{fontSize:19},onClick:'{{$foldMenu}}'}]},{name:'tabs',component:'Layout',className:"zlj-portal-header-center-tabs",children:(_children={name:'tabs',component:'Tabs',type:'card'},_defineProperty(_children,'type',"editable-card"),_defineProperty(_children,'hideAdd',true),_defineProperty(_children,'activeKey','{{data.content && data.content.name}}'),_defineProperty(_children,'onChange','{{$tabChange}}'),_defineProperty(_children,'onEdit','{{$tabEdit}}'),_defineProperty(_children,'_visible','{{ data.isTabsStyle && data.openTabs && data.openTabs.length > 0}}'),_defineProperty(_children,'children',[{name:'tab1',component:'Tabs.TabPane',key:'{{data.openTabs[_rowIndex].name}}',tab:'{{data.openTabs[_rowIndex].name}}',_power:'for in data.openTabs'}]),_children)}]},{name:'right',component:'Layout',className:"zlj-portal-header-right",children:[{name:'search',component:'Popover',placement:'bottomRight',children:{name:'search',component:'Layout',className:"zlj-portal-header-right-search",children:{name:'icon',component:'Icon',fontFamily:'awesome',showStyle:'blueSky',type:'search'}},content:{name:'search',component:'Input.Search'}},{name:'notice',component:'Popover',placement:'bottomRight',autoAdjustOverflow:true,overlayStyle:{width:300},children:{name:'notice',component:'Layout',className:"zlj-portal-header-right-search",children:{name:'badge',component:'Badge',count:5,offset:[0,2],children:{name:'icon',component:'Icon',fontFamily:'awesome',showStyle:'blueSky',type:'bullhorn'}}},content:{name:'notice',component:'AppLoader',appName:'zlj-portal-notice'}},{name:'topMenu',component:'Layout',className:"zlj-portal-header-right-topMenu",children:[{name:'topMenu',component:'Menu',className:"zlj-portal-header-right-topMenu",mode:'horizontal',onClick:'{{$topMenuClick}}',selectedKeys:[],children:[{name:'toggleTabs',component:'Menu.Item',key:'toggleTabs',_visible:false,children:[{name:'icon',component:'Icon',type:'appstore-o'},"{{data.isTabsStyle ? '正常风格' : '多页签显示风格'}}"]},{name:'gitter',component:'Menu.Item',key:'gitter',_visible:false,children:[{name:'icon',component:'Icon',fontFamily:'awesome',type:'wechat'},'聊天']},{name:'github',component:'Menu.Item',key:'github',_visible:false,children:[{name:'icon',component:'Icon',type:'github'},'源代码']},{name:'my',component:'Menu.SubMenu',key:'my',title:{name:'myTitle',component:'::span',className:'zlj-portal-header-right-my-title',children:[{name:'photo',component:'::img',className:'zlj-portal-header-right-photo',src:'{{$getPhoto()}}'},"{{data.other.currentUser?data.other.currentUser.name:'13334445556'}}"]},children:[{name:'mySetting',component:'Menu.Item',key:'mySetting',children:'个人设置'},{name:'logout',component:'Menu.Item',key:'logout',children:'注销'}]}]}]}]}]},{name:'content',component:'Layout',className:'zlj-portal-content',children:[{name:'left',component:'Layout',className:"{{'zlj-portal-content-left zlj-portal-content-left-' + (data.isFoldMenu?'fold':'unfold') }}",style:"{{({overflow:data.isFoldMenu?'visible':'auto'})}}",children:[{name:'menu',component:'Menu',mode:'vertical',theme:'dark',className:'zlj-portal-content-left-menu',//forceSubMenuRender:true,
-//subMenuCloseDelay: 0.06,
-//subMenuOpenDelay: 0.3,
-inlineCollapsed:'{{data.isFoldMenu}}',selectedKeys:"{{$getMenuSelectKeys()}}",defaultOpenKeys:"{{data.menuDefaultOpenKeys}}",onClick:'{{$menuClick}}',getPopupContainer:function getPopupContainer(){return document.querySelector('.zlj-portal-content-left-menu');},children:'{{$getMenuChildren()}}'},{name:'foldMenu',component:'Layout',className:'zlj-portal-content-left-foldMenu',children:[{name:'foldMenu',component:'Icon',type:'{{data.isFoldMenu ? \'menu-unfold\' :\'menu-fold\'}}',title:'{{data.isFoldMenu ? \'\u5C55\u5F00\u83DC\u5355\' :\'\u6536\u8D77\u83DC\u5355\'}}',showStyle:'showy',style:{fontSize:19},onClick:'{{$foldMenu}}'}]}]},{name:'container',component:'Layout',children:[(_ref={name:'tabs',component:'Tabs',className:'zlj-portal-content-tabs',type:'card'},_defineProperty(_ref,'type',"editable-card"),_defineProperty(_ref,'hideAdd',true),_defineProperty(_ref,'activeKey','{{data.content && data.content.name}}'),_defineProperty(_ref,'onChange','{{$tabChange}}'),_defineProperty(_ref,'onEdit','{{$tabEdit}}'),_defineProperty(_ref,'_visible','{{ data.isTabsStyle && data.openTabs && data.openTabs.length > 0}}'),_defineProperty(_ref,'_visible',false),_defineProperty(_ref,'children',[{name:'tab1',component:'Tabs.TabPane',key:'{{data.openTabs[_rowIndex].name}}',tab:'{{data.openTabs[_rowIndex].name}}',_power:'for in data.openTabs'}]),_ref),{name:'main',component:'Layout',className:'zlj-portal-content-main',_visible:'{{!!(data.content && data.content.appName)}}',children:{name:'main',component:'Layout',children:{name:'app',component:'AppLoader',appName:'{{ data.openTabs && data.openTabs.length > 0 && data.openTabs[_rowIndex].appName }}',onPortalReload:'{{$load}}',setPortalContent:'{{$setContent}}','...':'{{data.openTabs && data.openTabs.length > 0 && data.openTabs[_rowIndex].appProps}}',isTabStyle:'{{data.isTabsStyle}}',_notRender:'{{ !(data.content && data.content.name == data.openTabs[_rowIndex].name) }}',_power:'for in data.openTabs'}}}]}]},{name:'issue',component:'Movable',_visible:false,onClick:'{{$issueClick}}',style:{bottom:30,left:8,width:50,height:50},children:{name:'btn',component:'Button',type:'showy',children:'填问题'}}]};}function getInitState(){return{data:{menu:[],menuSelectedKeys:[],menuDefaultOpenKeys:[],content:{},openTabs:[],isTabsStyle:true,isFoldMenu:true,other:{}}};}
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {
+  try {
+    var info = gen[key](arg);
+    var value = info.value;
+  } catch (error) {
+    reject(error);
+    return;
+  }
+
+  if (info.done) {
+    resolve(value);
+  } else {
+    Promise.resolve(value).then(_next, _throw);
+  }
+}
+
+function _asyncToGenerator(fn) {
+  return function () {
+    var self = this,
+        args = arguments;
+    return new Promise(function (resolve, reject) {
+      var gen = fn.apply(self, args);
+
+      function _next(value) {
+        asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);
+      }
+
+      function _throw(err) {
+        asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);
+      }
+
+      _next(undefined);
+    });
+  };
+}
+
+module.exports = _asyncToGenerator;
 
 /***/ }),
 /* 4 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module) {
 
-module.exports = __webpack_require__.p + "photo.png";
+module.exports = {"isMakaApp":true,"name":"zlj-portal","description":"zlj-portal","version":"1.0.0","license":"MIT","author":"liujian zhang","repository":{"type":"git","url":"https://github.com/ziaochina/zlj-portal.git"},"bugs":{"url":"https://github.com/ziaochina/zlj-portal/issues"},"homepage":"https://github.com/ziaochina/zlj-portal#readme","scripts":{"start":"maka start","dev":"maka start --dev","build":"maka build","pkg":"maka pkg"},"dependencies":{"zlj-antd":"https://hub.makajs.org/zlj-antd/-/@1.0.3","zlj-sign-in":"https://hub.makajs.org/zlj-sign-in/-/@1.0.2"},"server":{"proxy":null,"port":8000},"subAppDir":"./apps"};
 
 /***/ }),
 /* 5 */
 /***/ (function(module, exports) {
 
-module.exports = __WEBPACK_EXTERNAL_MODULE__5__;
+function _classCallCheck(instance, Constructor) {
+  if (!(instance instanceof Constructor)) {
+    throw new TypeError("Cannot call a class as a function");
+  }
+}
+
+module.exports = _classCallCheck;
 
 /***/ }),
 /* 6 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, exports) {
 
-module.exports = __webpack_require__(7);
+function _defineProperties(target, props) {
+  for (var i = 0; i < props.length; i++) {
+    var descriptor = props[i];
+    descriptor.enumerable = descriptor.enumerable || false;
+    descriptor.configurable = true;
+    if ("value" in descriptor) descriptor.writable = true;
+    Object.defineProperty(target, descriptor.key, descriptor);
+  }
+}
 
+function _createClass(Constructor, protoProps, staticProps) {
+  if (protoProps) _defineProperties(Constructor.prototype, protoProps);
+  if (staticProps) _defineProperties(Constructor, staticProps);
+  return Constructor;
+}
+
+module.exports = _createClass;
 
 /***/ }),
 /* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
-"use strict";
-Object.defineProperty(exports,"__esModule",{value:true});var _mkMetaEngine=__webpack_require__(2);var pkgJson=__webpack_require__(8);__webpack_require__.p=window['__pub_'+pkgJson.name+'__'];var data=__webpack_require__(3);var config=__webpack_require__(0);__webpack_require__(10);__webpack_require__(11);__webpack_require__(4);__webpack_require__(12);exports.default={name:pkgJson.name,version:pkgJson.version,description:pkgJson.description,meta:data.getMeta(),components:[],config:config,load:function load(cb){cb(_mkMetaEngine.defaultComponent,__webpack_require__(14),__webpack_require__(20));}};module.exports=exports['default'];
+var arrayWithHoles = __webpack_require__(11);
+
+var iterableToArrayLimit = __webpack_require__(12);
+
+var nonIterableRest = __webpack_require__(13);
+
+function _slicedToArray(arr, i) {
+  return arrayWithHoles(arr) || iterableToArrayLimit(arr, i) || nonIterableRest();
+}
+
+module.exports = _slicedToArray;
 
 /***/ }),
 /* 8 */
-/***/ (function(module) {
+/***/ (function(module, exports, __webpack_require__) {
 
-module.exports = {"isMKApp":true,"name":"zlj-portal","description":"zlj-portal","version":"1.0.0","license":"MIT","author":"","keywords":["mk","monkey king","react","redux","mk-js","mk-command","zlj-portal"],"repository":{"type":"git","url":"https://github.com/ziaochina/zlj-portal.git"},"bugs":{"url":"https://github.com/ziaochina/zlj-portal/issues"},"homepage":"https://github.com/ziaochina/zlj-portal#readme","scripts":{"start":"mk start","build":"mk build","pkg":"mk pkg"},"dependencies":{"mk-command":"*"}};
+module.exports = __webpack_require__(17);
+
 
 /***/ }),
 /* 9 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(exports,"__esModule",{value:true});var _mkUtils=__webpack_require__(1);var _config=__webpack_require__(0);var _config2=_interopRequireDefault(_config);function _interopRequireDefault(obj){return obj&&obj.__esModule?obj:{default:obj};}/**
- * webapi.js 封装app所需的所有web请求
- * 供app测试使用，app加入网站后webpai应该由网站通过config,提供给每个app
- */var api=function api(key){return _config2.default.current.webapiMap[key];};exports.default={portal:{init:function init(option){return _mkUtils.fetch.post(api('portal.init'),option);}},user:{logout:function logout(){return _mkUtils.fetch.post(api('user.logout'),option);}}};module.exports=exports['default'];
-
-/***/ }),
-/* 10 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-var _slicedToArray=function(){function sliceIterator(arr,i){var _arr=[];var _n=true;var _d=false;var _e=undefined;try{for(var _i=arr[Symbol.iterator](),_s;!(_n=(_s=_i.next()).done);_n=true){_arr.push(_s.value);if(i&&_arr.length===i)break;}}catch(err){_d=true;_e=err;}finally{try{if(!_n&&_i["return"])_i["return"]();}finally{if(_d)throw _e;}}return _arr;}return function(arr,i){if(Array.isArray(arr)){return arr;}else if(Symbol.iterator in Object(arr)){return sliceIterator(arr,i);}else{throw new TypeError("Invalid attempt to destructure non-iterable instance");}};}();/**
- * mock.js 提供应用截获ajax请求，为脱离后台测试使用
- * 模拟查询更改内存中mockData,并返回数据
- */var _mkUtils=__webpack_require__(1);var mockData=_mkUtils.fetch.mockData;function initMockData(){if(!mockData.users){mockData.users=[{id:1,mobile:1,password:'1'}];}}_mkUtils.fetch.mock('/v1/portal/init',function(option,headers){initMockData();if(headers&&headers.token){var segments=headers.token.split(',');var _segments=_slicedToArray(segments,6),id=_segments[0],mobile=_segments[1],password=_segments[2],nickname=_segments[3],sex=_segments[4],birthday=_segments[5];var user=mockData.users.find(function(o){return o.id==id;});//mock简单处理，因为刷新网站，mock数据会丢失，将token中的用户数据加回去
-if(!user){user={id:id,mobile:mobile,password:password,nickname:nickname?nickname:mobile,sex:sex,birthday:birthday};mockData.user.push(user);}else{user.nickname=user.nickname||user.mobile;}return{result:true,value:{user:user}};}else{return{result:true,value:{}};}});_mkUtils.fetch.mock('/v1/logout',function(){initMockData();_mkUtils.fetch.clearAccessToken();return{result:true,value:true};});
-
-/***/ }),
-/* 11 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__.p + "logo.png";
-
-/***/ }),
-/* 12 */
-/***/ (function(module, exports, __webpack_require__) {
-
-// extracted by mini-css-extract-plugin
-
-/***/ }),
-/* 13 */,
-/* 14 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(exports,"__esModule",{value:true});var _regenerator=__webpack_require__(15);var _regenerator2=_interopRequireDefault(_regenerator);var _extends=Object.assign||function(target){for(var i=1;i<arguments.length;i++){var source=arguments[i];for(var key in source){if(Object.prototype.hasOwnProperty.call(source,key)){target[key]=source[key];}}}return target;};exports.default=creator;var _react=__webpack_require__(18);var _react2=_interopRequireDefault(_react);var _mkComponent=__webpack_require__(19);var _mkMetaEngine=__webpack_require__(2);var _immutable=__webpack_require__(5);var _mkUtils=__webpack_require__(1);var _config=__webpack_require__(0);var _config2=_interopRequireDefault(_config);function _interopRequireDefault(obj){return obj&&obj.__esModule?obj:{default:obj};}function _asyncToGenerator(fn){return function(){var gen=fn.apply(this,arguments);return new Promise(function(resolve,reject){function step(key,arg){try{var info=gen[key](arg);var value=info.value;}catch(error){reject(error);return;}if(info.done){resolve(value);}else{return Promise.resolve(value).then(function(value){step("next",value);},function(err){step("throw",err);});}}return step("next");});};}function _classCallCheck(instance,Constructor){if(!(instance instanceof Constructor)){throw new TypeError("Cannot call a class as a function");}}var action=function action(option){var _this=this;_classCallCheck(this,action);this.onInit=function(_ref){var component=_ref.component,injections=_ref.injections;_this.component=component;_this.injections=injections;injections.reduce('init');_this.load();//history增加
-_mkUtils.history.listen('zlj-portal',_this.listen);};this.listen=function(childApp,location,action){var currentAppName=_this.metaAction.gf('data.content.appName');var targetAppName=childApp;if(!targetAppName){_this.injections.reduce('closeAll');return;}if(targetAppName==currentAppName){return;}_this.setContent('',targetAppName);};this.componentWillUnmount=function(){_mkUtils.history.unlisten('zlj-portal',_this.listen);};this.load=_asyncToGenerator(/*#__PURE__*/_regenerator2.default.mark(function _callee(){var response;return _regenerator2.default.wrap(function _callee$(_context){while(1){switch(_context.prev=_context.next){case 0:_context.next=2;return _this.webapi.portal.init();case 2:response=_context.sent;if(response.user){_this.metaAction.context.set('currentUser',response.user);_this.metaAction.sf('data.other.currentUser',(0,_immutable.fromJS)(response.user));}else{_this.metaAction.context.set('currentUser',undefined);if(_this.component.props.onRedirect&&_this.config.goAfterSignOut){_this.component.props.onRedirect(_this.config.goAfterSignOut);}}if(response.menu){_this.injections.reduce('load',{menu:response.menu});}/*
-        如果菜单从ajax获取，那么使用下面的方式
-        if (this.webapi.getMenu) {
-            const menu = await this.webapi.getMenu()
-            this.injections.reduce('load', {menu})
-        }*/case 5:case'end':return _context.stop();}}},_callee,_this);}));this.getLogo=function(){return _this.config.logo;};this.getConfig=function(){return _this.config;};this.getPhoto=function(){return __webpack_require__(4);};this.getCurrentUser=function(){return _this.metaAction.context.get('currentUser')||{};};this.getMenuChildren=function(){var menu=_this.metaAction.gf('data.menu').toJS();var loop=function loop(children,level){var ret=[];children.forEach(function(child){var ele={name:child.key,key:child.key//是group
-};if(child.isGroup){ele.component='Menu.ItemGroup';ele.title=child.name;if(child.children){ele.children=loop(child.children,level+1);}}else{//没有下级
-if(!child.children){ele.component='Menu.Item';if(child.icon||level==1){ele.children=[{name:'icon',component:'Icon',type:child.icon||'desktop',className:'anticon',fontFamily:child.fontFamily},{name:'name',component:'::span',children:child.name}];}else{ele.children=child.name;}}else{ele.component='Menu.SubMenu';ele.children=loop(child.children,level+1);if(child.icon||level==1){ele.title=[{name:'icon',component:'Icon',className:'anticon',type:child.icon||'desktop',fontFamily:child.fontFamily},{name:'name',component:'::span',children:child.name}];}else{ele.title=child.name;}}}if(!(child.isVisible===false))ret.push(ele);});return ret;};return{_isMeta:true,value:loop(menu,1)};};this.topMenuClick=function(){var _ref3=_asyncToGenerator(/*#__PURE__*/_regenerator2.default.mark(function _callee2(e){return _regenerator2.default.wrap(function _callee2$(_context2){while(1){switch(_context2.prev=_context2.next){case 0:_context2.t0=e.key;_context2.next=_context2.t0==='logout'?3:_context2.t0==='github'?5:_context2.t0==='gitter'?7:_context2.t0==='mySetting'?9:_context2.t0==='toggleTabs'?13:14;break;case 3:if(_this.component.props.onRedirect&&_this.config.goAfterSignOut){_this.metaAction.context.set('currentUser',undefined);_mkUtils.fetch.clearAccessToken();_this.component.props.onRedirect(_this.config.goAfterSignOut);}return _context2.abrupt('break',14);case 5:window.open('https://www.github.com/ziaochina/mk-demo');return _context2.abrupt('break',14);case 7:window.open('https://gitter.im/mk-js/mk-js?utm_source=share-link&utm_medium=link&utm_campaign=share-link');return _context2.abrupt('break',14);case 9:if(_this.config.apps['mk-app-my-setting']){_context2.next=11;break;}throw'不存在mk-app-my-setting应用，该功能不能使用';case 11:_this.setContent('个人设置','mk-app-my-setting');return _context2.abrupt('break',14);case 13:_this.metaAction.sf('data.isTabsStyle',!_this.metaAction.gf('data.isTabsStyle'));case 14:case'end':return _context2.stop();}}},_callee2,_this);}));return function(_x){return _ref3.apply(this,arguments);};}();this.menuClick=function(e){var menu=_this.metaAction.gf('data.menu').toJS();var find=function find(children){var _iteratorNormalCompletion=true;var _didIteratorError=false;var _iteratorError=undefined;try{for(var _iterator=children[Symbol.iterator](),_step;!(_iteratorNormalCompletion=(_step=_iterator.next()).done);_iteratorNormalCompletion=true){var child=_step.value;if(child.key==e.key){return child;}if(child.children){var o=find(child.children);if(o)return o;}}}catch(err){_didIteratorError=true;_iteratorError=err;}finally{try{if(!_iteratorNormalCompletion&&_iterator.return){_iterator.return();}}finally{if(_didIteratorError){throw _iteratorError;}}}};var hit=find(menu);if(hit){_this.setContent(hit.name,hit.appName,hit.appParams);}};this.issueClick=function(){window.open('https://github.com/ziaochina/mk-demo/issues/new');};this.getMenuSelectKeys=function(){var content=_this.metaAction.gf('data.content');if(!content)return;var menuKeyNameMap=_this.metaAction.gf('data.menuKeyNameMap');return[menuKeyNameMap.get(content.get('name'))];};this.tabChange=function(key){var openTabs=_this.metaAction.gf('data.openTabs');var curr=openTabs.find(function(o){return o.get('name')==key;});_this.setContent(curr.get('name'),curr.get('appName'),curr.get('appProps'));};this.tabEdit=function(key,action){if(action=='remove'){_this.injections.reduce('closeContent',key);}};this.setContent=function(name,appName,appProps){_this.injections.reduce('setContent',name,appName,appProps);};this.foldMenu=function(){_this.metaAction.sf('data.isFoldMenu',!_this.metaAction.gf('data.isFoldMenu'));setTimeout(function(){var event=document.createEvent('HTMLEvents');event.initEvent("resize",true,true);window.dispatchEvent(event);},0);};this.metaAction=option.metaAction;this.config=_config2.default.current;this.webapi=this.config.webapi;}//history增加
-;function creator(option){var metaAction=new _mkMetaEngine.action(option),o=new action(_extends({},option,{metaAction:metaAction})),ret=_extends({},metaAction,o);metaAction.config({metaHandlers:ret});return ret;}module.exports=exports['default'];
-
-/***/ }),
-/* 15 */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__(16);
-
-
-/***/ }),
-/* 16 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
@@ -225,7 +246,9 @@ module.exports = __webpack_require__(16);
 
 // This method of obtaining a reference to the global object needs to be
 // kept identical to the way it is obtained in runtime.js
-var g = (function() { return this })() || Function("return this")();
+var g = (function() {
+  return this || (typeof self === "object" && self);
+})() || Function("return this")();
 
 // Use `getOwnPropertyNames` because not all browsers support calling
 // `hasOwnProperty` on the global `self` object in a worker. See #183.
@@ -238,7 +261,7 @@ var oldRuntime = hadRuntime && g.regeneratorRuntime;
 // Force reevalutation of runtime.js.
 g.regeneratorRuntime = undefined;
 
-module.exports = __webpack_require__(17);
+module.exports = __webpack_require__(10);
 
 if (hadRuntime) {
   // Restore the original runtime.
@@ -254,7 +277,7 @@ if (hadRuntime) {
 
 
 /***/ }),
-/* 17 */
+/* 10 */
 /***/ (function(module, exports) {
 
 /**
@@ -427,22 +450,14 @@ if (hadRuntime) {
         return Promise.resolve(value).then(function(unwrapped) {
           // When a yielded Promise is resolved, its final value becomes
           // the .value of the Promise<{value,done}> result for the
-          // current iteration. If the Promise is rejected, however, the
-          // result for this iteration will be rejected with the same
-          // reason. Note that rejections of yielded Promises are not
-          // thrown back into the generator function, as is the case
-          // when an awaited Promise is rejected. This difference in
-          // behavior between yield and await is important, because it
-          // allows the consumer to decide what to do with the yielded
-          // rejection (swallow it and continue, manually .throw it back
-          // into the generator, abandon iteration, whatever). With
-          // await, by contrast, there is no opportunity to examine the
-          // rejection reason outside the generator function, so the
-          // only option is to throw it from the await expression, and
-          // let the generator function handle the exception.
+          // current iteration.
           result.value = unwrapped;
           resolve(result);
-        }, reject);
+        }, function(error) {
+          // If a rejected Promise was yielded, throw the rejection back
+          // into the async generator function so it can be handled there.
+          return invoke("throw", error, resolve, reject);
+        });
       }
     }
 
@@ -982,33 +997,785 @@ if (hadRuntime) {
   // In sloppy mode, unbound `this` refers to the global object, fallback to
   // Function constructor if we're in global strict mode. That is sadly a form
   // of indirect eval which violates Content Security Policy.
-  (function() { return this })() || Function("return this")()
+  (function() {
+    return this || (typeof self === "object" && self);
+  })() || Function("return this")()
 );
 
 
 /***/ }),
-/* 18 */
+/* 11 */
 /***/ (function(module, exports) {
 
-module.exports = __WEBPACK_EXTERNAL_MODULE__18__;
+function _arrayWithHoles(arr) {
+  if (Array.isArray(arr)) return arr;
+}
+
+module.exports = _arrayWithHoles;
 
 /***/ }),
-/* 19 */
+/* 12 */
 /***/ (function(module, exports) {
 
-module.exports = __WEBPACK_EXTERNAL_MODULE__19__;
+function _iterableToArrayLimit(arr, i) {
+  var _arr = [];
+  var _n = true;
+  var _d = false;
+  var _e = undefined;
+
+  try {
+    for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {
+      _arr.push(_s.value);
+
+      if (i && _arr.length === i) break;
+    }
+  } catch (err) {
+    _d = true;
+    _e = err;
+  } finally {
+    try {
+      if (!_n && _i["return"] != null) _i["return"]();
+    } finally {
+      if (_d) throw _e;
+    }
+  }
+
+  return _arr;
+}
+
+module.exports = _iterableToArrayLimit;
 
 /***/ }),
-/* 20 */
+/* 13 */
+/***/ (function(module, exports) {
+
+function _nonIterableRest() {
+  throw new TypeError("Invalid attempt to destructure non-iterable instance");
+}
+
+module.exports = _nonIterableRest;
+
+/***/ }),
+/* 14 */
 /***/ (function(module, exports, __webpack_require__) {
 
+module.exports = __webpack_require__.p + "logo.png";
+
+/***/ }),
+/* 15 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__.p + "photo.png";
+
+/***/ }),
+/* 16 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// extracted by mini-css-extract-plugin
+
+/***/ }),
+/* 17 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
 "use strict";
-Object.defineProperty(exports,"__esModule",{value:true});var _extends=Object.assign||function(target){for(var i=1;i<arguments.length;i++){var source=arguments[i];for(var key in source){if(Object.prototype.hasOwnProperty.call(source,key)){target[key]=source[key];}}}return target;};exports.default=creator;var _immutable=__webpack_require__(5);var _mkMetaEngine=__webpack_require__(2);var _config=__webpack_require__(0);var _config2=_interopRequireDefault(_config);var _data=__webpack_require__(3);var _mkUtils=__webpack_require__(1);function _interopRequireDefault(obj){return obj&&obj.__esModule?obj:{default:obj};}function _classCallCheck(instance,Constructor){if(!(instance instanceof Constructor)){throw new TypeError("Cannot call a class as a function");}}var reducer=function reducer(option){var _this=this;_classCallCheck(this,reducer);this.init=function(state,option){state=_this.metaReducer.init(state,(0,_data.getInitState)());if(_this.config.menu&&!_this.config.webapi.getMenu){return _this.load(state,{menu:_this.config.menu});}return state;};this.load=function(state,_ref){var menu=_ref.menu;if(!menu||menu.lenght==0)return state;var defaultMenuItem,firstMenuItem,defaultOpens=[],menuKeyNameMap={},menuAppNameMap={};var loop=function loop(children){var ret=[];children.forEach(function(child){menuKeyNameMap[child.name]=child.key;//history增加
-if(child.appName){menuAppNameMap[child.appName]={name:child.name,props:child.appParams||{}};}if(!child.children){if(!firstMenuItem){firstMenuItem=child;}if(child.isDefault){defaultMenuItem=child;}}else{if(child.isExpand){defaultOpens.push(child);}loop(child.children);}});return ret;};loop(menu);defaultMenuItem=defaultMenuItem||firstMenuItem;var menuSelectedKeys=(0,_immutable.fromJS)(defaultMenuItem?[defaultMenuItem.key]:[]);var menuDefaultOpenKeys=(0,_immutable.fromJS)(defaultOpens.map(function(o){return o.key;}));var defaultContent=defaultMenuItem?defaultMenuItem:{};state=_this.metaReducer.sf(state,'data.menu',(0,_immutable.fromJS)(menu));state=_this.metaReducer.sf(state,'data.menuKeyNameMap',(0,_immutable.fromJS)(menuKeyNameMap));state=_this.metaReducer.sf(state,'data.menuAppNameMap',(0,_immutable.fromJS)(menuAppNameMap));state=_this.metaReducer.sf(state,'data.menuSelectedKeys',menuSelectedKeys);state=_this.metaReducer.sf(state,'data.menuDefaultOpenKeys',menuDefaultOpenKeys);var childApp=_mkUtils.history.getChildApp('portal');if(childApp)return _this.setContent(state,'',childApp);else return _this.setContent(state,defaultContent.name,defaultContent.appName,defaultContent.appProps);};this.setContent=function(state,name,appName,appProps){//判断当前显示页签appName和要新打开的是否一致
-var currContent=_this.metaReducer.gf(state,'data.content');if(currContent&&appName==currContent.get('appName'))return state;//history增加
-var menuAppNameMap=_this.metaReducer.gf(state,'data.menuAppNameMap');if(name&&appName&&menuAppNameMap.getIn([appName,'name'])!=name){menuAppNameMap=menuAppNameMap.set(appName,(0,_immutable.fromJS)({name:name,props:appProps}));state=_this.metaReducer.sf(state,'data.menuAppNameMap',menuAppNameMap);}name=menuAppNameMap.getIn([appName,'name']);appProps=appProps||menuAppNameMap.getIn([appName,'props']);var content=(0,_immutable.fromJS)({name:name,appName:appName,appProps:appProps});state=_this.metaReducer.sf(state,'data.content',content);var openTabs=_this.metaReducer.gf(state,'data.openTabs')||(0,_immutable.List)();var hitIndex=openTabs.findIndex(function(o){return o.get('name')==name||o.get('appName')==appName;});var hit=hitIndex!=-1;var isTabsStyle=_this.metaReducer.gf(state,'data.isTabsStyle');if(!hit){if(isTabsStyle)openTabs=openTabs.push(content);else openTabs=(0,_immutable.List)().push(content);state=_this.metaReducer.sf(state,'data.openTabs',openTabs);}else{if(!isTabsStyle){openTabs=(0,_immutable.List)().push(content);state=_this.metaReducer.sf(state,'data.openTabs',openTabs);}else{state=_this.metaReducer.sf(state,'data.openTabs.'+hitIndex,content);}}setTimeout(function(){_mkUtils.history.pushChildApp('portal',content.get('appName'));},0);return state;};this.closeContent=function(state,name){var openTabs=_this.metaReducer.gf(state,'data.openTabs')||(0,_immutable.List)();var hitIndex=openTabs.findIndex(function(o){return o.get('name')==name;});openTabs=openTabs.remove(hitIndex);state=_this.metaReducer.sf(state,'data.openTabs',openTabs);return _this.metaReducer.sf(state,'data.content',openTabs.get(openTabs.size-1));};this.closeAll=function(state){state=_this.metaReducer.sf(state,'data.openTabs',new _immutable.List());return _this.metaReducer.sf(state,'data.content',new _immutable.Map());};this.metaReducer=option.metaReducer;this.config=_config2.default.current;};function creator(option){var metaReducer=new _mkMetaEngine.reducer(option),o=new reducer(_extends({},option,{metaReducer:metaReducer}));return _extends({},metaReducer,o);}module.exports=exports['default'];
+__webpack_require__.r(__webpack_exports__);
+
+// EXTERNAL MODULE: ./package.json
+var package_0 = __webpack_require__(4);
+
+// CONCATENATED MODULE: ./view.js
+/* harmony default export */ var view = ({
+  component: 'div',
+  className: 'zlj-portal',
+  children: [{
+    component: 'div',
+    className: 'zlj-portal-header',
+    children: [{
+      component: 'div',
+      className: "{{'zlj-portal-header-left zlj-portal-header-left-' + (data.isFoldMenu?'fold':'unfold') }}",
+      children: [{
+        component: 'img',
+        className: 'zlj-portal-header-left-logo',
+        src: 'logo.png'
+      }, {
+        component: 'span',
+        className: 'zlj-portal-header-left-caption',
+        children: '某某系统',
+        _visible: '{{!data.isFoldMenu}}'
+      }]
+    }, {
+      component: 'div',
+      className: "zlj-portal-header-center"
+    }, {
+      component: 'div',
+      className: "zlj-portal-header-right",
+      children: [{
+        component: 'antd.Popover',
+        placement: 'bottomRight',
+        children: {
+          component: 'div',
+          className: "zlj-portal-header-right-search",
+          children: {
+            component: 'antd.Icon',
+            type: 'search'
+          }
+        },
+        content: {
+          component: 'antd.Input.Search'
+        }
+      }, {
+        component: 'antd.Popover',
+        placement: 'bottomRight',
+        autoAdjustOverflow: true,
+        overlayStyle: {
+          width: 300
+        },
+        children: {
+          component: 'div',
+          className: "zlj-portal-header-right-search",
+          children: {
+            component: 'antd.Badge',
+            count: 5,
+            offset: [0, 2],
+            children: {
+              component: 'antd.Icon',
+              size: 'large',
+              type: 'bell'
+            }
+          }
+        },
+        content: {
+          component: 'AppLoader',
+          appName: 'zlj-portal-notice'
+        }
+      }, {
+        component: 'div',
+        className: "zlj-portal-header-right-topMenu",
+        children: [{
+          component: 'antd.Menu',
+          className: "zlj-portal-header-right-topMenu",
+          mode: 'horizontal',
+          onClick: '{{$topMenuClick}}',
+          selectedKeys: [],
+          children: [{
+            component: 'antd.Menu.Item',
+            key: 'toggleTabs',
+            _visible: false,
+            children: [{
+              component: 'antd.Icon',
+              type: 'appstore-o'
+            }, "{{data.isTabsStyle ? '正常风格' : '多页签显示风格'}}"]
+          }, {
+            component: 'antd.Menu.SubMenu',
+            key: 'my',
+            title: {
+              component: 'span',
+              className: 'zlj-portal-header-right-my-title',
+              children: [{
+                component: 'img',
+                className: 'zlj-portal-header-right-photo',
+                src: 'photo.png'
+              }, "{{data.other.currentUser?data.other.currentUser.name:'13334445556'}}"]
+            },
+            children: [{
+              component: 'antd.Menu.Item',
+              key: 'mySetting',
+              children: '个人设置'
+            }, {
+              component: 'antd.Menu.Item',
+              key: 'logout',
+              children: '注销'
+            }]
+          }]
+        }]
+      }]
+    }]
+  }, {
+    component: 'div',
+    className: 'zlj-portal-content',
+    children: [{
+      component: 'div',
+      className: "{{'zlj-portal-content-left zlj-portal-content-left-' + (data.isFoldMenu?'fold':'unfold') }}",
+      style: "{{({overflow:data.isFoldMenu?'visible':'auto'})}}",
+      children: [{
+        component: 'antd.Menu',
+        mode: 'vertical',
+        theme: 'dark',
+        className: 'zlj-portal-content-left-menu',
+        inlineCollapsed: '{{data.isFoldMenu}}',
+        selectedKeys: "{{$getMenuSelectKeys()}}",
+        defaultOpenKeys: "{{data.menuDefaultOpenKeys}}",
+        onClick: '{{$menuClick}}',
+        getPopupContainer: function getPopupContainer() {
+          return document.querySelector('.zlj-portal-content-left-menu');
+        },
+        children: '{{$getMenuChildren()}}'
+      }, {
+        component: 'div',
+        className: 'zlj-portal-content-left-foldMenu',
+        children: [{
+          component: 'antd.Icon',
+          type: "{{data.isFoldMenu ? 'double-right' :'double-left'}}",
+          title: "{{data.isFoldMenu ? '\u5C55\u5F00\u83DC\u5355' :'\u6536\u8D77\u83DC\u5355'}}",
+          style: {
+            fontSize: 19
+          },
+          onClick: '{{$foldMenu}}'
+        }]
+      }]
+    }, {
+      component: 'div',
+      className: 'zlj-portal-content-main',
+      _visible: '{{!!(data.content && data.content.appName)}}',
+      children: [{
+        component: 'div',
+        className: "zlj-portal-content-main-tabs",
+        children: {
+          component: 'antd.Tabs',
+          type: "editable-card",
+          hideAdd: true,
+          activeKey: '{{data.content && data.content.appName}}',
+          onChange: '{{$tabChange}}',
+          onEdit: '{{$tabEdit}}',
+          children: [{
+            component: 'antd.Tabs.TabPane',
+            key: "{{data.openTabs[_rowIndex].appName}}",
+            tab: '{{data.openTabs[_rowIndex].title}}',
+            _power: 'for in data.openTabs'
+          }],
+          _visible: '{{ data.isTabsStyle && data.openTabs && data.openTabs.length > 0}}'
+        }
+      }, {
+        component: 'div',
+        className: "zlj-portal-content-main-app",
+        children: {
+          component: 'AppLoader',
+          appName: '{{ data.openTabs && data.openTabs.length > 0 && data.openTabs[_rowIndex].appName }}',
+          onPortalReload: '{{$load}}',
+          setPortalContent: '{{$setContent}}',
+          '...': '{{data.openTabs && data.openTabs.length > 0 && data.openTabs[_rowIndex].appProps}}',
+          isTabStyle: '{{data.isTabsStyle}}',
+          _notRender: '{{ !(data.content && data.content.appName == data.openTabs[_rowIndex].appName) }}',
+          _power: 'for in data.openTabs'
+        }
+      }]
+    }]
+  }]
+});
+// EXTERNAL MODULE: /usr/local/lib/node_modules/@makajs/cli/node_modules/@babel/runtime/regenerator/index.js
+var regenerator = __webpack_require__(2);
+var regenerator_default = /*#__PURE__*/__webpack_require__.n(regenerator);
+
+// EXTERNAL MODULE: /usr/local/lib/node_modules/@makajs/cli/node_modules/@babel/runtime/helpers/asyncToGenerator.js
+var asyncToGenerator = __webpack_require__(3);
+var asyncToGenerator_default = /*#__PURE__*/__webpack_require__.n(asyncToGenerator);
+
+// EXTERNAL MODULE: /usr/local/lib/node_modules/@makajs/cli/node_modules/@babel/runtime/helpers/classCallCheck.js
+var classCallCheck = __webpack_require__(5);
+var classCallCheck_default = /*#__PURE__*/__webpack_require__.n(classCallCheck);
+
+// EXTERNAL MODULE: /usr/local/lib/node_modules/@makajs/cli/node_modules/@babel/runtime/helpers/createClass.js
+var createClass = __webpack_require__(6);
+var createClass_default = /*#__PURE__*/__webpack_require__.n(createClass);
+
+// EXTERNAL MODULE: /usr/local/lib/node_modules/@makajs/cli/node_modules/@babel/runtime/helpers/defineProperty.js
+var defineProperty = __webpack_require__(1);
+var defineProperty_default = /*#__PURE__*/__webpack_require__.n(defineProperty);
+
+// EXTERNAL MODULE: external "maka"
+var external_maka_ = __webpack_require__(0);
+
+// CONCATENATED MODULE: ./action.js
+
+
+
+
+
+
+var _dec, _class2;
+
+
+var action_action = (_dec = Object(external_maka_["actionMixin"])('base'), _dec(_class2 =
+/*#__PURE__*/
+function () {
+  function action(option) {
+    var _this = this;
+
+    classCallCheck_default()(this, action);
+
+    defineProperty_default()(this, "onInit", function () {
+      _this.load();
+
+      external_maka_["navigate"].listen(_this.listen);
+      external_maka_["navigate"].redirect(external_maka_["navigate"].getLocation().pathname + external_maka_["navigate"].getLocation().search);
+    });
+
+    defineProperty_default()(this, "load",
+    /*#__PURE__*/
+    asyncToGenerator_default()(
+    /*#__PURE__*/
+    regenerator_default.a.mark(function _callee() {
+      var response;
+      return regenerator_default.a.wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              _context.next = 2;
+              return external_maka_["fetch"].post('/v1/portal/init', {});
+
+            case 2:
+              response = _context.sent;
+
+              if (response.user) {
+                _this.base.context.set('currentUser', response.user);
+
+                _this.metaAction.sf('data.other.currentUser', fromJS(response.user));
+              } else {
+                _this.base.context.set('currentUser', undefined);
+                /*
+                if (this.component.props.onRedirect && this.config.goAfterSignOut) {
+                    this.component.props.onRedirect(this.config.goAfterSignOut)
+                }*/
+
+              }
+
+            case 4:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee, this);
+    })));
+
+    defineProperty_default()(this, "getCurrentUser", function () {
+      return _this.base.context.get('currentUser') || {};
+    });
+
+    defineProperty_default()(this, "getMenuChildren", function () {
+      var menu = _this.base.gs('data.menu');
+
+      var loop = function loop(children, level) {
+        var ret = [];
+        children.forEach(function (child) {
+          var ele = {
+            name: child.appName,
+            key: child.appName //是group
+
+          };
+
+          if (child.isGroup) {
+            ele.component = 'antd.Menu.ItemGroup';
+            ele.title = child.title;
+
+            if (child.children) {
+              ele.children = loop(child.children, level + 1);
+            }
+          } else {
+            //没有下级
+            if (!child.children) {
+              ele.component = 'antd.Menu.Item';
+
+              if (child.icon || level == 1) {
+                ele.children = [{
+                  component: 'antd.Icon',
+                  type: child.icon || 'desktop',
+                  className: 'anticon'
+                }, {
+                  name: 'name',
+                  component: 'span',
+                  children: child.title
+                }];
+              } else {
+                ele.children = child.title;
+              }
+            } else {
+              ele.component = 'antd.Menu.SubMenu';
+              ele.children = loop(child.children, level + 1);
+
+              if (child.icon || level == 1) {
+                ele.title = [{
+                  component: 'antd.Icon',
+                  className: 'anticon',
+                  type: child.icon || 'desktop'
+                }, {
+                  component: 'span',
+                  children: child.title
+                }];
+              } else {
+                ele.title = child.title;
+              }
+            }
+          }
+
+          if (!(child.isVisible === false)) ret.push(ele);
+        });
+        return ret;
+      };
+
+      return {
+        _isMeta: true,
+        value: loop(menu, 1)
+      };
+    });
+
+    defineProperty_default()(this, "topMenuClick",
+    /*#__PURE__*/
+    function () {
+      var _ref2 = asyncToGenerator_default()(
+      /*#__PURE__*/
+      regenerator_default.a.mark(function _callee2(e) {
+        return regenerator_default.a.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                _context2.t0 = e.key;
+                _context2.next = _context2.t0 === 'logout' ? 3 : _context2.t0 === 'mySetting' ? 7 : _context2.t0 === 'toggleTabs' ? 9 : 10;
+                break;
+
+              case 3:
+                _this.base.context.set('currentUser', undefined);
+
+                external_maka_["fetch"].clearAccessToken();
+                external_maka_["navigate"].redirect('/zlj-sign-in');
+                return _context2.abrupt("break", 10);
+
+              case 7:
+                _this.setContent('个人设置', 'zlj-my');
+
+                return _context2.abrupt("break", 10);
+
+              case 9:
+                _this.base.ss({
+                  'data.isTabsStyle': !_this.base.gs('data.isTabsStyle')
+                });
+
+              case 10:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2, this);
+      }));
+
+      return function (_x) {
+        return _ref2.apply(this, arguments);
+      };
+    }());
+
+    defineProperty_default()(this, "menuClick", function (e) {
+      var hit = _this.findMenu(_this.base.gs('data.menu'), e.key);
+
+      if (hit) {
+        _this.setContent(hit.name, hit.appName, hit.appProps);
+      }
+    });
+
+    defineProperty_default()(this, "getMenuSelectKeys", function () {
+      var content = _this.base.gs('data.content');
+
+      if (!content) return;
+
+      var menu = _this.findMenu(_this.base.gs('data.menu'), content.appName);
+
+      return menu ? [menu.appName] : [];
+    });
+
+    defineProperty_default()(this, "tabChange", function (key) {
+      var openTabs = _this.base.gs('data.openTabs');
+
+      var curr = openTabs.find(function (o) {
+        return o.appName == key;
+      });
+
+      _this.setContent(curr.title, curr.appName, curr.appProps);
+    });
+
+    defineProperty_default()(this, "tabEdit", function (key, action) {
+      if (action == 'remove') {
+        var openTabs = _this.base.gs('data.openTabs') || [];
+        var hitIndex = openTabs.findIndex(function (o) {
+          return o.appName == key;
+        });
+        openTabs.splice(hitIndex, 1);
+        var json = {
+          'data.openTabs': openTabs,
+          'data.content': openTabs.length > 0 ? openTabs[openTabs.length - 1] : {}
+        };
+
+        _this.base.setState(json);
+      }
+    });
+
+    defineProperty_default()(this, "foldMenu", function () {
+      _this.base.ss({
+        'data.isFoldMenu': !_this.base.gs('data.isFoldMenu')
+      });
+    });
+
+    defineProperty_default()(this, "setContent", function (title, appName, appProps) {
+      if (!appName) return; //判断当前显示页签appName和要新打开的是否一致
+
+      var data = _this.base.getState('data'),
+          menu = data.menu,
+          openTabs = data.openTabs || [],
+          isTabsStyle = data.isTabsStyle,
+          oriMenuItem = _this.findMenu(menu, appName),
+          json = {};
+
+      var currContent = data.content;
+      if (currContent && appName == currContent.appName) return;
+      title = title || oriMenuItem && oriMenuItem.title;
+      appProps = appProps || oriMenuItem && oriMenuItem.appProps || {};
+      var content = {
+        title: title,
+        appName: appName,
+        appProps: appProps
+      };
+      json['data.content'] = content;
+      var hitIndex = openTabs.findIndex(function (o) {
+        return o.title == title || o.appName == appName;
+      });
+      var hit = hitIndex != -1;
+
+      if (!hit) {
+        if (!isTabsStyle) openTabs = [];
+        openTabs.push(content);
+        json['data.openTabs'] = openTabs;
+      } else {
+        if (isTabsStyle) {
+          json['data.openTabs' + hitIndex] = content;
+        } else {
+          openTabs = [];
+          openTabs.push(content);
+          json['data.openTabs'] = openTabs;
+        }
+      }
+
+      _this.base.setState(json);
+
+      setTimeout(function () {
+        var location = external_maka_["navigate"].getLocation();
+        var full = "".concat(location.pathname).concat(location.search);
+        var segs = full.split('/');
+        segs = segs.slice(0, segs.indexOf('zlj-portal') + 1);
+        segs.push(content.appName);
+        external_maka_["navigate"].redirect(segs.join('/'));
+      }, 0);
+    });
+
+    defineProperty_default()(this, "listen", function (location, action) {
+      var full = "".concat(location.pathname).concat(location.search);
+      if (!full || full.indexOf('zlj-portal') == -1) return;
+      var segs = full.split('/'),
+          targetApp = segs[segs.length - 1];
+
+      if (targetApp == 'zlj-portal' || !targetApp) {
+        _this.base.ss({
+          'data.openTabs': [],
+          'data.content': {}
+        });
+      } else {
+        _this.setContent('', targetApp);
+      }
+    });
+
+    defineProperty_default()(this, "componentWillUnmount", function () {
+      external_maka_["navigate"].unlisten(_this.listen);
+    });
+
+    Object.assign(this, option.mixins);
+  }
+
+  createClass_default()(action, [{
+    key: "findMenu",
+    value: function findMenu(menu, appName) {
+      var loop = function loop(children) {
+        var ret;
+        var _iteratorNormalCompletion = true;
+        var _didIteratorError = false;
+        var _iteratorError = undefined;
+
+        try {
+          for (var _iterator = children[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+            var child = _step.value;
+
+            if (child.appName == appName) {
+              ret = child;
+              break;
+            }
+
+            if (child.children) {
+              ret = loop(child.children);
+              if (ret) break;
+            }
+          }
+        } catch (err) {
+          _didIteratorError = true;
+          _iteratorError = err;
+        } finally {
+          try {
+            if (!_iteratorNormalCompletion && _iterator.return != null) {
+              _iterator.return();
+            }
+          } finally {
+            if (_didIteratorError) {
+              throw _iteratorError;
+            }
+          }
+        }
+
+        return ret;
+      };
+
+      return loop(menu);
+    }
+  }]);
+
+  return action;
+}()) || _class2);
+
+// CONCATENATED MODULE: ./state.js
+var state_menu = [{
+  key: '1',
+  title: '首页',
+  appName: 'zlj-home',
+  appProps: {},
+  icon: 'home',
+  isDefault: true
+}, {
+  key: '2',
+  title: '看板',
+  appName: 'zlj-home1',
+  appProps: {},
+  icon: 'home',
+  isDefault: true
+}];
+/* harmony default export */ var state = ({
+  data: {
+    menu: state_menu,
+    menuSelectedKeys: [],
+    menuDefaultOpenKeys: [],
+    content: {},
+    openTabs: [],
+    isTabsStyle: true,
+    isFoldMenu: true,
+    other: {}
+  }
+});
+// EXTERNAL MODULE: /usr/local/lib/node_modules/@makajs/cli/node_modules/@babel/runtime/helpers/slicedToArray.js
+var slicedToArray = __webpack_require__(7);
+var slicedToArray_default = /*#__PURE__*/__webpack_require__.n(slicedToArray);
+
+// CONCATENATED MODULE: ./mock.js
+
+
+/**
+ * mock.js 提供应用截获ajax请求，为脱离后台测试使用
+ * 模拟查询更改内存中mockData,并返回数据
+ */
+
+var mockData = external_maka_["fetch"].mockData;
+
+function initMockData() {
+  if (!mockData.users) {
+    mockData.users = [{
+      id: 1,
+      account: 13334445556,
+      password: 'c4ca4238a0b923820dcc509a6f75849b',
+      name: 'zlj'
+    }];
+  }
+
+  if (!mockData.menu) {
+    mockData.menu = [{
+      key: '1',
+      title: '首页',
+      appName: 'zlj-home',
+      appProps: {},
+      icon: 'home',
+      isDefault: true
+    }];
+  }
+}
+
+external_maka_["fetch"].mock('/v1/portal/init', function (option, headers) {
+  initMockData();
+
+  if (headers && headers.token) {
+    var segments = headers.token.split(',');
+
+    var _segments = slicedToArray_default()(segments, 6),
+        id = _segments[0],
+        mobile = _segments[1],
+        password = _segments[2],
+        nickname = _segments[3],
+        sex = _segments[4],
+        birthday = _segments[5];
+
+    var user = mockData.users.find(function (o) {
+      return o.id == id;
+    }); //mock简单处理，因为刷新网站，mock数据会丢失，将token中的用户数据加回去
+
+    if (!user) {
+      user = {
+        id: id,
+        mobile: mobile,
+        password: password,
+        nickname: nickname ? nickname : mobile,
+        sex: sex,
+        birthday: birthday
+      };
+      mockData.user.push(user);
+    } else {
+      user.nickname = user.nickname || user.mobile;
+    }
+
+    return {
+      result: true,
+      value: {
+        user: user
+      }
+    };
+  } else {
+    return {
+      result: true,
+      value: {}
+    };
+  }
+});
+external_maka_["fetch"].mock('/v1/logout', function () {
+  initMockData();
+  external_maka_["fetch"].clearAccessToken();
+  return {
+    result: true,
+    value: true
+  };
+});
+// EXTERNAL MODULE: ./img/logo.png
+var logo = __webpack_require__(14);
+
+// EXTERNAL MODULE: ./img/photo.png
+var photo = __webpack_require__(15);
+
+// EXTERNAL MODULE: ./style.less
+var style = __webpack_require__(16);
+
+// CONCATENATED MODULE: ./index.js
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "name", function() { return index_name; });
+/* concated harmony reexport view */__webpack_require__.d(__webpack_exports__, "view", function() { return view; });
+/* concated harmony reexport state */__webpack_require__.d(__webpack_exports__, "state", function() { return state; });
+/* concated harmony reexport action */__webpack_require__.d(__webpack_exports__, "action", function() { return action_action; });
+
+
+
+
+
+
+
+
+var index_name = package_0.name;
+
 
 /***/ })
 /******/ ]);
 });
-//# sourceMappingURL=zlj-portal.js.map

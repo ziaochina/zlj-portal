@@ -1,23 +1,18 @@
-const pkgJson = require('./package.json')
+import pkgJson from './package.json'
+import view from './view'
+import action from './action'
+import state from './state'
+import './mock'
+import './img/logo.png'
+import './img/photo.png'
+import './style.less'
 
-__webpack_public_path__ = window[`__pub_${pkgJson.name}__`];
+const name = pkgJson.name
 
-import { defaultComponent } from 'mk-meta-engine'
-const data = require('./data')
-const config = require('./config')
-require('./mock')
-require('./img/logo.png')
-require('./img/photo.png')
-require('./style.less')
-
-export default {
-    name: pkgJson.name,
-    version: pkgJson.version,
-    description: pkgJson.description,
-    meta: data.getMeta(),
-    components: [],
-    config: config,
-    load: (cb) => {
-        cb(defaultComponent, require('./action'), require('./reducer'))
-	}
+export {
+    name,
+    view,
+    state,
+    action
 }
+

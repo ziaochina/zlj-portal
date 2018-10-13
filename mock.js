@@ -3,7 +3,7 @@
  * 模拟查询更改内存中mockData,并返回数据
  */
 
-import { fetch } from 'mk-utils'
+import { fetch } from 'maka'
 
 const mockData = fetch.mockData
 
@@ -11,8 +11,20 @@ function initMockData() {
     if (!mockData.users) {
         mockData.users = [{
             id: 1,
-            mobile: 1,
-            password: '1',
+            account: 13334445556,
+            password: 'c4ca4238a0b923820dcc509a6f75849b',
+            name: 'zlj'
+        }]
+    }
+
+    if(!mockData.menu){
+        mockData.menu = [{
+            key: '1',
+            title: '首页',
+            appName: 'zlj-home',
+            appProps: {},
+            icon: 'home',
+            isDefault: true
         }]
     }
 }
