@@ -2,7 +2,7 @@
   "isMakaApp": true,
   "name": "zlj-portal",
   "description": "zlj-portal",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "license": "MIT",
   "author": "liujian zhang",
   "repository": {
@@ -20,8 +20,8 @@
     "pkg": "maka pkg"
   },
   "dependencies": {
-    "zlj-antd": "https://hub.makajs.org/zlj-antd/-/@1.0.3",
-    "zlj-sign-in": "https://hub.makajs.org/zlj-sign-in/-/@1.0.2"
+    "zlj-antd": "https://hub.makajs.org/zlj-antd/-/@1.0.4",
+    "zlj-sign-in": "https://hub.makajs.org/zlj-sign-in/-/@1.0.4"
   },
   "server": {
     "proxy": null,
