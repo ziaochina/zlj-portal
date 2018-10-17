@@ -174,7 +174,7 @@ module.exports = _asyncToGenerator;
 /* 4 */
 /***/ (function(module) {
 
-module.exports = {"isMakaApp":true,"name":"zlj-portal","description":"zlj-portal","version":"1.0.0","license":"MIT","author":"liujian zhang","repository":{"type":"git","url":"https://github.com/ziaochina/zlj-portal.git"},"bugs":{"url":"https://github.com/ziaochina/zlj-portal/issues"},"homepage":"https://github.com/ziaochina/zlj-portal#readme","scripts":{"start":"maka start","dev":"maka start --dev","build":"maka build","pkg":"maka pkg"},"dependencies":{"zlj-antd":"https://hub.makajs.org/zlj-antd/-/@1.0.3","zlj-sign-in":"https://hub.makajs.org/zlj-sign-in/-/@1.0.2"},"server":{"proxy":null,"port":8000},"subAppDir":"./apps"};
+module.exports = {"isMakaApp":true,"name":"zlj-portal","description":"zlj-portal","version":"1.0.1","license":"MIT","author":"liujian zhang","repository":{"type":"git","url":"https://github.com/ziaochina/zlj-portal.git"},"bugs":{"url":"https://github.com/ziaochina/zlj-portal/issues"},"homepage":"https://github.com/ziaochina/zlj-portal#readme","scripts":{"start":"maka start","dev":"maka start --dev","build":"maka build","pkg":"maka pkg"},"dependencies":{"zlj-antd":"https://hub.makajs.org/zlj-antd/-/@1.0.4","zlj-sign-in":"https://hub.makajs.org/zlj-sign-in/-/@1.0.4"},"server":{"proxy":null,"port":8000},"subAppDir":"./apps"};
 
 /***/ }),
 /* 5 */
@@ -1100,7 +1100,7 @@ var package_0 = __webpack_require__(4);
       }, {
         component: 'span',
         className: 'zlj-portal-header-left-caption',
-        children: '某某系统',
+        children: 'Application',
         _visible: '{{!data.isFoldMenu}}'
       }]
     }, {
@@ -1164,7 +1164,7 @@ var package_0 = __webpack_require__(4);
             children: [{
               component: 'antd.Icon',
               type: 'appstore-o'
-            }, "{{data.isTabsStyle ? '正常风格' : '多页签显示风格'}}"]
+            }, "{{data.isTabsStyle ? 'Normal' : 'Tabs'}}"]
           }, {
             component: 'antd.Menu.SubMenu',
             key: 'my',
@@ -1180,11 +1180,11 @@ var package_0 = __webpack_require__(4);
             children: [{
               component: 'antd.Menu.Item',
               key: 'mySetting',
-              children: '个人设置'
+              children: 'My setting'
             }, {
               component: 'antd.Menu.Item',
               key: 'logout',
-              children: '注销'
+              children: 'Sign out'
             }]
           }]
         }]
@@ -1216,7 +1216,7 @@ var package_0 = __webpack_require__(4);
         children: [{
           component: 'antd.Icon',
           type: "{{data.isFoldMenu ? 'double-right' :'double-left'}}",
-          title: "{{data.isFoldMenu ? '\u5C55\u5F00\u83DC\u5355' :'\u6536\u8D77\u83DC\u5355'}}",
+          title: "{{data.isFoldMenu ? 'Open' :'Close'}}",
           style: {
             fontSize: 19
           },
@@ -1238,10 +1238,10 @@ var package_0 = __webpack_require__(4);
           onChange: '{{$tabChange}}',
           onEdit: '{{$tabEdit}}',
           children: [{
+            _for: 'item in data.openTabs',
             component: 'antd.Tabs.TabPane',
-            key: "{{data.openTabs[_rowIndex].appName}}",
-            tab: '{{data.openTabs[_rowIndex].title}}',
-            _power: 'for in data.openTabs'
+            key: "{{item.appName}}",
+            tab: '{{item.title}}'
           }],
           _visible: '{{ data.isTabsStyle && data.openTabs && data.openTabs.length > 0}}'
         }
@@ -1249,14 +1249,14 @@ var package_0 = __webpack_require__(4);
         component: 'div',
         className: "zlj-portal-content-main-app",
         children: {
+          _for: 'item in data.openTabs',
           component: 'AppLoader',
-          appName: '{{ data.openTabs && data.openTabs.length > 0 && data.openTabs[_rowIndex].appName }}',
+          appName: '{{ item && item.appName }}',
           onPortalReload: '{{$load}}',
           setPortalContent: '{{$setContent}}',
-          '...': '{{data.openTabs && data.openTabs.length > 0 && data.openTabs[_rowIndex].appProps}}',
+          '...': '{{item && item.appProps}}',
           isTabStyle: '{{data.isTabsStyle}}',
-          _notRender: '{{ !(data.content && data.content.appName == data.openTabs[_rowIndex].appName) }}',
-          _power: 'for in data.openTabs'
+          _notRender: '{{ !(data.content && data.content.appName == item.appName) }}'
         }
       }]
     }]
@@ -1328,15 +1328,8 @@ function () {
 
               if (response.user) {
                 _this.base.context.set('currentUser', response.user);
-
-                _this.metaAction.sf('data.other.currentUser', fromJS(response.user));
               } else {
                 _this.base.context.set('currentUser', undefined);
-                /*
-                if (this.component.props.onRedirect && this.config.goAfterSignOut) {
-                    this.component.props.onRedirect(this.config.goAfterSignOut)
-                }*/
-
               }
 
             case 4:
@@ -1359,8 +1352,7 @@ function () {
         children.forEach(function (child) {
           var ele = {
             name: child.appName,
-            key: child.appName //是group
-
+            key: child.appName
           };
 
           if (child.isGroup) {
@@ -1371,7 +1363,6 @@ function () {
               ele.children = loop(child.children, level + 1);
             }
           } else {
-            //没有下级
             if (!child.children) {
               ele.component = 'antd.Menu.Item';
 
@@ -1440,7 +1431,7 @@ function () {
                 return _context2.abrupt("break", 10);
 
               case 7:
-                _this.setContent('个人设置', 'zlj-my');
+                _this.setContent('My setting', 'zlj-my');
 
                 return _context2.abrupt("break", 10);
 
@@ -1513,7 +1504,7 @@ function () {
     });
 
     defineProperty_default()(this, "setContent", function (title, appName, appProps) {
-      if (!appName) return; //判断当前显示页签appName和要新打开的是否一致
+      if (!appName) return;
 
       var data = _this.base.getState('data'),
           menu = data.menu,
@@ -1637,18 +1628,17 @@ function () {
 // CONCATENATED MODULE: ./state.js
 var state_menu = [{
   key: '1',
-  title: '首页',
+  title: 'Home',
   appName: 'zlj-home',
   appProps: {},
   icon: 'home',
   isDefault: true
 }, {
   key: '2',
-  title: '看板',
-  appName: 'zlj-home1',
+  title: 'Board',
+  appName: 'zlj-board',
   appProps: {},
-  icon: 'home',
-  isDefault: true
+  icon: 'dashboard'
 }];
 /* harmony default export */ var state = ({
   data: {
@@ -1689,7 +1679,7 @@ function initMockData() {
   if (!mockData.menu) {
     mockData.menu = [{
       key: '1',
-      title: '首页',
+      title: 'Home',
       appName: 'zlj-home',
       appProps: {},
       icon: 'home',

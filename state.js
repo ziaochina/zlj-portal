@@ -1,17 +1,16 @@
 const menu = [{
     key: '1',
-    title: '首页',
+    title: 'Home',
     appName: 'zlj-home',
     appProps: {},
     icon: 'home',
     isDefault: true
 },{
     key: '2',
-    title: '看板',
-    appName: 'zlj-home1',
+    title: 'Board',
+    appName: 'zlj-board',
     appProps: {},
-    icon: 'home',
-    isDefault: true
+    icon: 'dashboard'
 }]
 
 export default {

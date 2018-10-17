@@ -14,7 +14,7 @@ export default {
             }, {
                 component: 'span',
                 className: 'zlj-portal-header-left-caption',
-                children: '某某系统',
+                children: 'Application',
                 _visible: '{{!data.isFoldMenu}}',
             }]
         }, {
@@ -78,7 +78,7 @@ export default {
                             component: 'antd.Icon',
                             type: 'appstore-o'
                         },
-                            "{{data.isTabsStyle ? '正常风格' : '多页签显示风格'}}"]
+                            "{{data.isTabsStyle ? 'Normal' : 'Tabs'}}"]
                     }, {
                         component: 'antd.Menu.SubMenu',
                         key: 'my',
@@ -94,11 +94,11 @@ export default {
                         children: [{
                             component: 'antd.Menu.Item',
                             key: 'mySetting',
-                            children: '个人设置'
+                            children: 'My setting'
                         }, {
                             component: 'antd.Menu.Item',
                             key: 'logout',
-                            children: '注销'
+                            children: 'Sign out'
                         }]
                     }]
                 }]
@@ -128,7 +128,7 @@ export default {
                 children: [{
                     component: 'antd.Icon',
                     type: `{{data.isFoldMenu ? 'double-right' :'double-left'}}`,
-                    title: `{{data.isFoldMenu ? '展开菜单' :'收起菜单'}}`,
+                    title: `{{data.isFoldMenu ? 'Open' :'Close'}}`,
                     style: { fontSize: 19 },
                     onClick: '{{$foldMenu}}'
                 }]
@@ -148,10 +148,10 @@ export default {
                     onChange: '{{$tabChange}}',
                     onEdit: '{{$tabEdit}}',
                     children: [{
+                        _for: 'item in data.openTabs',
                         component: 'antd.Tabs.TabPane',
-                        key: `{{data.openTabs[_rowIndex].appName}}`,
-                        tab: '{{data.openTabs[_rowIndex].title}}',
-                        _power: 'for in data.openTabs'
+                        key: `{{item.appName}}`,
+                        tab: '{{item.title}}'
                     }],
                     _visible: '{{ data.isTabsStyle && data.openTabs && data.openTabs.length > 0}}',
                 }
@@ -159,14 +159,14 @@ export default {
                 component: 'div',
                 className: "zlj-portal-content-main-app",
                 children: {
+                    _for: 'item in data.openTabs',
                     component: 'AppLoader',
-                    appName: '{{ data.openTabs && data.openTabs.length > 0 && data.openTabs[_rowIndex].appName }}',
+                    appName: '{{ item && item.appName }}',
                     onPortalReload: '{{$load}}',
                     setPortalContent: '{{$setContent}}',
-                    '...': '{{data.openTabs && data.openTabs.length > 0 && data.openTabs[_rowIndex].appProps}}',
+                    '...': '{{item && item.appProps}}',
                     isTabStyle: '{{data.isTabsStyle}}',
-                    _notRender: '{{ !(data.content && data.content.appName == data.openTabs[_rowIndex].appName) }}',
-                    _power: 'for in data.openTabs',
+                    _notRender: '{{ !(data.content && data.content.appName == item.appName) }}'
                 }
             }]
 

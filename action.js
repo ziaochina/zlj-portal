@@ -17,14 +17,9 @@ export default class action {
         const response = await fetch.post('/v1/portal/init', {})
         if (response.user) {
             this.base.context.set('currentUser', response.user)
-            this.metaAction.sf('data.other.currentUser', fromJS(response.user))
         }
         else {
             this.base.context.set('currentUser', undefined)
-            /*
-            if (this.component.props.onRedirect && this.config.goAfterSignOut) {
-                this.component.props.onRedirect(this.config.goAfterSignOut)
-            }*/
         }
     }
 
@@ -41,7 +36,6 @@ export default class action {
                     key: child.appName
                 }
 
-                //是group
                 if (child.isGroup) {
                     ele.component = 'antd.Menu.ItemGroup'
                     ele.title = child.title
@@ -50,7 +44,6 @@ export default class action {
                     }
                 }
                 else {
-                    //没有下级
                     if (!child.children) {
                         ele.component = 'antd.Menu.Item'
 
@@ -109,7 +102,7 @@ export default class action {
                 navigate.redirect('/zlj-sign-in')
                 break;
             case 'mySetting':
-                this.setContent('个人设置', 'zlj-my')
+                this.setContent('My setting', 'zlj-my')
                 break;
             case 'toggleTabs':
                 this.base.ss({ 'data.isTabsStyle': !this.base.gs('data.isTabsStyle') })
@@ -175,10 +168,9 @@ export default class action {
     }
 
     setContent = (title, appName, appProps) => {
-        if(!appName)
-            return 
+        if (!appName)
+            return
 
-        //判断当前显示页签appName和要新打开的是否一致
         var data = this.base.getState('data'),
             menu = data.menu,
             openTabs = data.openTabs || [],
@@ -231,19 +223,19 @@ export default class action {
 
     listen = (location, action) => {
         let full = `${location.pathname}${location.search}`
-        if(!full || full.indexOf('zlj-portal') == -1) 
-            return 
+        if (!full || full.indexOf('zlj-portal') == -1)
+            return
 
         let segs = full.split('/'),
-            targetApp = segs[segs.length-1]
-        
-        if(targetApp == 'zlj-portal' || !targetApp){
+            targetApp = segs[segs.length - 1]
+
+        if (targetApp == 'zlj-portal' || !targetApp) {
             this.base.ss({
                 'data.openTabs': [],
                 'data.content': {}
             })
         }
-        else{
+        else {
             this.setContent('', targetApp)
         }
     }

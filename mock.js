@@ -20,7 +20,7 @@ function initMockData() {
     if(!mockData.menu){
         mockData.menu = [{
             key: '1',
-            title: '首页',
+            title: 'Home',
             appName: 'zlj-home',
             appProps: {},
             icon: 'home',
