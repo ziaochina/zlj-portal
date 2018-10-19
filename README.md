@@ -1,4 +1,4 @@
-Zlj-portal application, a simple example of portal.
+zlj-portal application, a simple example of portal.
 
 ## Usage
 

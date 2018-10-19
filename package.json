@@ -1,8 +1,8 @@
 {
   "isMakaApp": true,
   "name": "zlj-portal",
-  "description": "zlj-portal",
-  "version": "1.0.3",
+  "description": "zlj-portal application, a simple example of portal.",
+  "version": "1.0.4",
   "license": "MIT",
   "author": "liujian zhang",
   "repository": {
